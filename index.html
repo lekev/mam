@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <html>
+    <link rel="stylesheet" href="style.css">
+
+<body>
+    <div class="container">
+        <div>
+            <button type="button" class="btn-prev">Previous page</button>
+            [<span class="page-current">1</span> of <span class="page-total">-</span>]
+            <button type="button" class="btn-next">Next page</button>
+        </div>
+
+        <div>
+            State: <i class="page-state">read</i>, orientation: <i class="page-orientation">landscape</i>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="flip-book" id="demoBookExample">
+            <div class="page page-cover page-cover-top" data-density="hard">
+                <div class="page-content">
+                    <div class="page-image" style="background-image: url(img/p_0.jpg)"></div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-content">
+                    <div class="page-image" style="background-image: url(img/p_1.jpg)"></div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="page-content">
+                    <div class="page-image" style="background-image: url(img/p_2.jpg)"></div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="page-content">
+                    <div class="page-image" style="background-image: url(img/p_3.jpg)"></div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="page-content">
+                    <div class="page-image" style="background-image: url(img/p_4.jpg)"></div>
+                </div>
+            </div>
+            <!-- PAGES .... -->
+
+
+            <div class="page page-cover page-cover-bottom" data-density="hard">
+                <div class="page-content">
+                    <h2>THE END</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="js/page-flip.browser.js"></script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+        const pageFlip = new St.PageFlip(
+            document.getElementById("demoBookExample"),
+            {
+                width: 569, // base page width
+                height: 733, // base page height
+                minWidth: 315,
+                maxWidth: 1052,
+                minHeight: 404,
+                maxHeight: 1350,
+                size: "stretch",
+                maxShadowOpacity: 0.5, // Half shadow intensity
+                showCover: true,
+                mobileScrollSupport: false // disable content scrolling on mobile devices
+            }
+        );
+
+        // load pages
+        pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+        document.querySelector(".page-total").innerText = pageFlip.getPageCount();
+        document.querySelector(
+            ".page-orientation"
+        ).innerText = pageFlip.getOrientation();
+
+        document.querySelector(".btn-prev").addEventListener("click", () => {
+            pageFlip.flipPrev(); // Turn to the previous page (with animation)
+        });
+
+        document.querySelector(".btn-next").addEventListener("click", () => {
+            pageFlip.flipNext(); // Turn to the next page (with animation)
+        });
+
+
+    });
+</script>
+
+</html>
